@@ -1,0 +1,33 @@
+########################
+#### alias 
+########################
+
+alias betty="/Users/skkim/gitclone/betty/main.rb"
+alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias workflowy="chrome --app='https://workflowy.com'"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+alias dm="docker-machine"
+
+
+
+########################
+#### function
+########################
+
+function gh_create_repo () {
+    # print $1 : username
+    # print $2 : project name
+    # print $3 : description
+    local user=`git config -l | grep github.user | sed 's/github.user=//'`
+    eval "curl -u \"$user\" https://api.github.com/user/repos -d '{\"name\":\"$1\"}'"
+}
+
+function dmenv () {
+    eval "$(docker-machine env $1)"
+}
+
+function dash () {
+    eval "open dash://$1"
+}
+
