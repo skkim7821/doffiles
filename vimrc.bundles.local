@@ -1,0 +1,28 @@
+Plugin 'shinzui/vim-idleFingers'
+Plugin 'vim-scripts/jade.vim'
+Plugin 'vim-scripts/nginx.vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'Yggdroot/indentLine'
+
+Plugin 'rking/ag.vim'
+
+" JQuery tag completion
+Bundle 'firat/tagcomplete'
+
+" Add closing parenthesis, bracket, quotes_________________
+Bundle 'Raimondi/delimitMate'
+
+" Add closing tag support for HTML and XML
+Bundle 'closetag.vim'
+Bundle 'jpalardy/vim-slime'
+Bundle 'vim-scripts/ocamlMultiAnnot'
+Bundle 'othree/javascript-libraries-syntax.vim'
+Bundle 'Shougo/vimshell.vim'
+
+Bundle 'stanangeloff/php.vim'
+Bundle 'tyru/open-browser.vim'
+Bundle 'shawncplus/phpcomplete.vim'
+Bundle 'dsawardekar/wordpress.vim'
+Bundle 'laoyang945/vimflowy'
+Bundle 'clones/vim-zsh'
+Bundle 'ekalinin/Dockerfile.vim'

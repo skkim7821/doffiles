@@ -1,0 +1,160 @@
+colorschem idleFingers
+
+set ts=2 sts=2 sw=2 tw=72
+
+let mapleader=','
+let g:indentLine_color_term=239
+let g:indentLine_char='|'
+let g:indent_guides_auto_colors = 0 
+let g:used_javascript_libs = 'jquery,underscore,lo-dash,backbone,angularjs,requirejs'
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black ctermbg=236
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=black ctermbg=238
+autocmd VimEnter,Colorscheme * :hi SignColumn guibg=#333233 ctermbg=238
+
+autocmd FileType ruby set ft=ruby.rails
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+
+set autoindent    " always set autoindenting onetab:
+set copyindent    " copy the previous indentation on autoindenting
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'"
+set smarttab      " insert tabs on the start of a line according to
+                  "    shiftwidth, not tabstop
+
+let javaScript_fold=1         " JavaScript
+let perl_fold=1               " Perl
+let php_folding=1             " PHP
+let r_syntax_folding=1        " R
+let ruby_fold=1               " Ruby
+let sh_fold_enabled=1         " sh
+let vimsyn_folding='af'       " Vim script
+let xml_syntax_folding=1      " XML FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+
+autocmd Filetype html setlocal et ts=2 sts=2 sw=2 foldmethod=indent
+autocmd Filetype css setlocal et ts=2 sts=2 sw=2
+
+"autocmd FileType html,css,ruby,eruby,javascript,php,xml,haml,jade call indent_guides#enable()
+
+" Folder
+set foldlevelstart=0
+function! MyFoldText()
+  let line = getline(v:foldstart)
+  let nucolwidth = &fdc + &number * &numberwidth
+  let windowwidth = winwidth(0) - nucolwidth - 3
+  let foldedlinecount = v:foldend - v:foldstart
+  " expand tabs into spaces
+  let onetab = strpart('          ', 0, &tabstop)
+  let line = substitute(line, '\t', onetab, 'g')
+  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+  let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+  return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction
+set foldtext=MyFoldText()
+
+" NodeJS dictionnary
+au FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
+
+" Better indendation support for Javascript
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
+set wildignore+=node_modules,tmp,build,dist,www
+
+" Add closing parenthesis, bracket, quotes_________________
+"let delimitMate_matchpairs = "(:),[:],{:},<:>"
+"au FileType vim,html,svg,xml let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+"let delimitMate_quotes = "\" ' ` *"" '
+"au FileType html,js,coffee let b:delimitMate_quotes = "\" '"
+
+" Add closing tag support for HTML and XML
+autocmd FileType html,htmldjango,jinjahtml,eruby,mako,svg let b:closetag_html_style=1
+autocmd FileType html,xhtml,xml,xsd,wsdl,htmldjango,jinjahtml,eruby,mako,byt,svg source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
+
+" File system explorer_____________________________________
+"autocmd vimenter * if !argc() | NERDTree | endif " open Nerdtree if no file specified at start
+"nmap <F3> :NERDTreeToggle<CR>
+let NERDTreeWinSize=25
+"let NERDTreeMinimalUI=1
+"let NERDTreeDirArrows=1
+"let NERDTreeShowHidden=1
+
+" Syntax for JADE files____________________________________
+"au BufNewFile,BufRead,BufReadPost *.jade.html,*.jade set filetype=jade
+
+" Better tags definition: brew install ctags-exuberant
+set tags=./tags,tags;/
+" CoffeeScript : gem install coffeetags
+if executable('coffeetags')
+  let g:tagbar_type_coffee = {
+        \ 'ctagsbin' : 'coffeetags',
+        \ 'ctagsargs' : '--include-vars',
+        \ 'kinds' : [
+        \ 'f:functions',
+        \ 'o:object',
+        \ ],
+        \ 'sro' : ".",
+        \ 'kind2scope' : {
+        \ 'f' : 'object',
+        \ 'o' : 'object',
+        \ }
+        \ }
+endif
+" Markdown support
+let g:tagbar_type_markdown = {
+  \ 'ctagstype' : 'markdown',
+  \ 'kinds' : [
+    \ 'h:Heading_L1',
+    \ 'i:Heading_L2',
+    \ 'k:Heading_L3'
+  \ ]
+\ }
+" Ruby
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
+" CSS
+let g:tagbar_type_css = {
+\ 'ctagstype' : 'Css',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 's:selectors',
+        \ 'i:identities'
+    \ ]
+\ }
+
+" Syntax error checking____________________________________
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol='⚠'
+let g:syntastic_style_warning_symbol='⚠'
+
+set rtp+=/usr/local/share/ocamlmerlin/vim
+
+
+" JavaScript libraries completion
+let g:used_javascript_libs='jquery,angularjs'
+
+" System copy and paste
+noremap <leader>y "*y
+noremap <leader>yy "*Y
+
+" Preserve indentation while pasting text from system clipboard
+noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+
+" Yanking (pasting) goes on clipboard
+set clipboard+=unnamed
+
+autocmd FileType ocaml source /Users/frum/.opam/system/share/vim/syntax/ocp-indent.vim
+au BufRead,BufNewFile *.ml,*.mli compiler ocaml
+let g:syntastic_ocaml_checkers=['merlin']
+
