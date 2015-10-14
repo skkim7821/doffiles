@@ -2,7 +2,6 @@
 #### alias 
 ########################
 
-alias betty="/Users/skkim/gitclone/betty/main.rb"
 alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias workflowy="chrome --app='https://workflowy.com'"
