@@ -7,6 +7,7 @@ alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias workflowy="chrome --app='https://workflowy.com'"
 alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dm="docker-machine"
+alias s3local="s3cmd -c ~/.s3cfg-local"
 
 
 
